@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 const server = app.listen(process.env.PORT || port, () => {
-    console.log(`successfully start the app at port ${port}`)
+    console.log(`successfully start the app at port ${process.env.PORT}`)
 });
 
 const io = socket(server, {
