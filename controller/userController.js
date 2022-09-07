@@ -51,11 +51,15 @@ module.exports.setpersonal = async (req, res, next) => {
         const avatar = req.body.avatar;
         const gender = req.body.gender;
         const aboutme = req.body.aboutme;
+        const tobeexplore = req.body.tobeexplore;
+        const programs = req.body.programs;
         const result = await User.findByIdAndUpdate(userId, {
             isAvatarImageSet: true,
             avatar: avatar,
             gender: gender,
             aboutme: aboutme,
+            tobeexplore: tobeexplore,
+            programs: programs,
         }, { new: true })
 
         const user = await User.findOneAndUpdate(
@@ -73,7 +77,7 @@ module.exports.getContacts = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
         const users = await User.find({$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
-            "email", "username", "avatar", "id", "gender", "aboutme"
+            "email", "username", "avatar", "id", "gender", "aboutme", "tobeexplore", "programs"
         ]);
         return res.json(users);
     } catch (e) {
@@ -85,7 +89,7 @@ module.exports.getFriends = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
         const users = await User.find({$and: [{_id: {$ne: req.params.id}},{ _id: currentUser.friendList }]}).select([
-            "email", "username", "avatar", "id", "gender", "aboutme"
+            "email", "username", "avatar", "id", "gender", "aboutme", "tobeexplore", "programs"
         ]);
         return res.json(users);
     } catch (e) {

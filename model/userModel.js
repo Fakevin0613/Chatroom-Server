@@ -36,6 +36,15 @@ const userSchema = new mongoose.Schema({
     },
     requestList: [mongoose.Schema.Types.ObjectId],
     friendList: [mongoose.Schema.Types.ObjectId],
+    tobeexplore: {
+        type: String,
+        default: "No",
+    },
+    programs: {
+        type: String,
+        default: "I don't know:/",
+        max: 50,
+    }
 
 });
 
