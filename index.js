@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.net/KevinChatRoom', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => [
