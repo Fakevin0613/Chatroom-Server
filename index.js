@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
-mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.net/KevinChatRoom', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => [
@@ -26,7 +26,7 @@ mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.
     console.error(error)
 });
 
-const server = app.listen(port, () => {
+const server = app.listen(process.env.PORT || port, () => {
     console.log(`successfully start the app at port ${port}`)
 });
 
