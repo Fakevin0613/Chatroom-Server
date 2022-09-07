@@ -32,7 +32,8 @@ const server = app.listen(process.env.PORT || port, () => {
 
 const io = socket(server, {
     cors: {
-        origin: `https://uwchatroom.netlify.app`,
+        // origin: `https://uwchatroom.netlify.app`,
+        origin: `http://localhost:3001`,
         credentials: true,
     },
 });
