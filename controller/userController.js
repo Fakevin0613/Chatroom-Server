@@ -76,7 +76,7 @@ module.exports.setpersonal = async (req, res, next) => {
 module.exports.getContacts = async (req, res, next) => {
     try {
         const currentUser = await User.findById(req.params.id);
-        const users = await User.find({$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
+        const users = await User.find({$nor: [{tobeexplore: "No" }, {_id: currentUser.friendList }, {_id: currentUser.requestList }]}).select([
             "email", "username", "avatar", "id", "gender", "aboutme", "tobeexplore", "programs"
         ]);
         return res.json(users);
@@ -182,4 +182,17 @@ module.exports.setReject = async (req, res, next) => {
     } catch (e) {
         next(e);
     }
-}
+};
+
+module.exports.searchContacts = async (req, res, next) => {
+    try {
+        const currentUser = await User.findById(req.params.id);
+        const keyword = req.body.keyword;
+        const users = await User.find({$and: [{username : new RegExp(keyword, 'i')}, {$nor: [{_id: currentUser.friendList }, {_id: currentUser.requestList }]}]}).select([
+            "email", "username", "avatar", "id", "gender", "aboutme", "tobeexplore", "programs"
+        ]);
+        return res.json(users);
+    } catch (e) {
+        next(e);
+    }
+};

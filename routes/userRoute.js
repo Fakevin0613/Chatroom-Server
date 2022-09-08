@@ -1,4 +1,4 @@
-const { register, login, setpersonal, getContacts, setRequest, setAccept, getFriends, getRequests, setDelete, setReject} = require('../controller/userController');
+const { register, login, setpersonal, getContacts, setRequest, setAccept, getFriends, getRequests, setDelete, setReject, searchContacts} = require('../controller/userController');
 
 const router = require('express').Router();
 router.post("/register", register)
@@ -11,5 +11,6 @@ router.post("/request/:id", setRequest)
 router.post("/accept/:id", setAccept)
 router.post("/reject/:id", setReject)
 router.post("/delete/:id", setDelete)
+router.post("/searchcontacts/:id", searchContacts)
 
 module.exports = router;
