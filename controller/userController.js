@@ -168,3 +168,18 @@ module.exports.setDelete = async (req, res, next) => {
         next(e);
     }
 }
+
+module.exports.setReject = async (req, res, next) => {
+    try {
+        const targetId = req.body.id;
+        const userId = req.params.id
+        const resultRemove = await User.findOneAndUpdate(
+            {_id: userId},
+            { $pull: {requestList: targetId}},
+            { new: true }
+        )
+        return res.json({ status: true, resultRemove });
+    } catch (e) {
+        next(e);
+    }
+}
