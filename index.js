@@ -11,12 +11,13 @@ const port = 1000;
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoutes);
 
+mongoose.set("strictQuery", false);
 mongoose.connect('mongodb+srv://fakevin:Qinyang2_0_0_0@cluster0.pc4qrok.mongodb.net/KevinChatRoom', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -32,8 +33,8 @@ const server = app.listen(process.env.PORT || port, () => {
 
 const io = socket(server, {
     cors: {
-        // origin: `https://uwchatroom.netlify.app`,
-        origin: `http://localhost:3001`,
+        origin: `https://uwchatroom.netlify.app`,
+        // origin: `http://localhost:3000`,
         credentials: true,
     },
 });
